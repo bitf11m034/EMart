@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FinalProjectEAD.Models.Item>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+
+
+
+ @{
+    
+    
+    Layout = "~/Views/Shared/_Mylayout4.cshtml";
+
+
+} 
+
+@{
+    ViewBag.Title = "Items";
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+
+
+                <table class="table table-striped">
+                    
+                    <tr>
+<th>Item Id</th>
+<th>Item Name</th>
+<th>Price</th>
+<th>Category</th>
+<th>Pictures</th>
+<th>Pay</th>
+
+</tr>
+@foreach(var item in Model){
+
+    <tr>
+        <td> @item.Id </td>
+        <td> @item.Name </td>
+        <td> @item.Price </td>
+        <td> @item.Category </td>
+        <td><img src="~/Files/@item.ImageUrl" style="width:70px;"  /></td>
+
+       
+         <td><a href="#">Pay</a></td>
+        <td><a href="#">Delete</a></td>
+       @*<td> @Html.ActionLink("Delete", "DeleteFromCart", "Customer", new { id = @item.Id }, new { }) </td>*@
+
+    </tr>
+    
+
+
+}
+
+
+    
+
+
+                </table>

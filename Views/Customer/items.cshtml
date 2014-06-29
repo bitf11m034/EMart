@@ -1,0 +1,173 @@
+﻿
+@model IEnumerable<FinalProjectEAD.Models.Item>
+
+ @{
+    
+    
+    Layout = "~/Views/Shared/_Mylayout4.cshtml";
+
+
+} 
+
+@{
+    ViewBag.Title = "Items";
+}
+
+
+@Scripts.Render("~/bundles/jquery")
+
+
+<script>
+    $(document).ready(function () {
+
+        $('#checking').hide();
+
+        $('#button123').click(function () {
+
+            var userName = $('#search').val();
+
+
+            $('#checking').show();
+            $.getJSON("/Customer/QuickSearch?term=" + userName, function (data) {
+            
+                $('#checking').hide();
+                if (data) {
+                    $('#result').text("Found");
+                    var items = '<table><tr><th>Name</th><th>Category</th><th>Price</th</tr>';
+
+                    $.each(data, function (i, country) {
+                        items += "<tr><td>" + country.Name + "</td><td>" + country.Category + "</td><td>" + country.Price + "</td></tr>";
+                    });
+                    items += "</table>";
+                    $('#result').html(items);
+                }
+                else {
+                    $('#result').text("Not Found");
+
+                }
+
+
+
+
+            });
+
+        });
+
+    });
+    </script>
+
+
+
+
+
+<div id="checking">Checking...</div>
+ 
+            @Html.Partial("Partial1");
+      
+  <!-- Start: MAIN CONTENT -->
+    <div class="content">
+
+      <div class="container">
+        <div class="page-header">
+          
+        </div>
+
+  
+    
+    
+          
+
+
+@*          <script>
+              $(function () {
+                  $('#tags').autocomplete({
+                      source: function (request, response) {
+                          $.ajax({
+                              url: '@Url.Action("QuickSearch","Customer")',
+                      dataType: "json",
+                      contentType: 'application/json, charset=utf-8',
+                      data: {
+                          search: $("#tags").val()
+                      },
+                      success: function (data) {
+
+                          response($.map(data, function (item) {
+                              return {
+                                  label: item
+                              };
+                          }));
+                      },
+                      error: function (xhr, status, error) {
+                          alert(error);
+                      }
+                  });
+              },
+               minLength: 2
+           });
+      });
+
+  </script>
+ 
+<div class="ui-widget">
+  <label for="tags">Tags: </label>
+  <input id="tags" /> 
+</div>*@
+
+<div>
+
+    <input type="text" id="search" />
+    <input type="button" id ="button123" value="Search" />
+
+
+</div>
+
+          <div id="result"></div>
+        <div class="row">
+
+          
+
+  <h4 class="widget-header"> List Of Items</h4>
+       <div class="widget-body" style="width:auto;">
+
+           
+            @Html.ActionLink("View Cart", "Cart", "Customer", new { }, new { }) 
+                <table class="table table-striped">
+                    
+                    <tr>
+<th>Item Id</th>
+<th>Item Name</th>
+<th>Price</th>
+<th>Category</th>
+<th>Pictures</th>
+<th>Buy</th>
+</tr>
+@foreach(var item in Model){
+
+    <tr>
+        <td> @item.Id </td>
+        <td> @item.Name </td>
+        <td> @item.Price </td>
+        <td> @item.Category </td>
+        <td><img src="~/Files/@item.ImageUrl" style="width:70px;"  /></td>
+        <td> @Html.ActionLink("Buy", "Buy", "Customer", new { id = @item.Id }, new { }) </td>
+
+
+    </tr>
+    
+
+
+}
+
+
+    
+
+
+                </table>
+                
+            
+           
+         </div>
+        </div>
+      </div>
+
+    </div>

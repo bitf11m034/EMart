@@ -1,0 +1,66 @@
+
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+          <!-- Start: MAIN CONTENT -->
+    <div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1>Add Items</h1>
+        </div>
+          
+        <div class="row">
+     <div class="span6 offset3">
+     <h4 class="widget-header"> Add your Item information</h4>
+        <div class="widget-body">
+                
+   <div class="center-align">
+
+  @using (Html.BeginForm()) {
+      
+  <div class="form-horizontal form-signin-signup">
+  <input type="text" name="item_name" id="Name" placeholder="Name Of Item">
+  <input type="text" name="price" id="price"  placeholder="Price Of Item">
+                 
+ <select name="item_category" class="form-control">
+    <option value="Choose Category">Choose Category</option>
+    <option value="Belts">Belts</option>
+    <option value="Pants">Pants</option>
+    <option value="Shirts">Shirts</option>
+    
+</select><br><br>
+   <br>
+         
+  
+   <input type="submit" value="Add" class="btn btn-primary btn-large">
+    
+          
+             </div> 
+        
+                    }
+       <form  enctype="multipart/form-data" >
+
+    Upload Image: <input type="file" name="image" />
+ 
+     
+ 
+    <input type="submit" value="upload" />
+
+           
+</form> 
+
+         <a href="#"><input type="submit" value="Back" class="btn btn-large bottom-space"></a>
+    </div>
+                  
+               
+                
+                 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+

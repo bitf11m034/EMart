@@ -1,0 +1,153 @@
+﻿
+@model FinalProjectEAD.Models.Login
+
+@{
+    
+    
+    Layout = "~/Views/Shared/_Mylayout.cshtml";
+
+
+} 
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+@Scripts.Render("~/bundles/jquery")
+    <script>
+        $(document).ready(function () {
+            
+            $('#checking').hide();
+
+            $('#b1').click(function () {
+
+                var userName = $('#UserName').val();
+                
+              
+                $('#checking').show();
+                $.getJSON("/Customer/CheckUserName?UserName="+userName, function (data) {
+                    $('#checking').hide();
+                    if (data) {
+                        $('#result').text("User already exists in database");
+
+                    }
+                    else {
+                        $('#result').text("Username Available");
+                    }
+                });
+
+            });
+
+        });
+    </script>
+
+<script>
+    $(document).ready(function () {
+
+        $('#checking').hide();
+
+        $('#UserName').blur(function () {
+
+            var userName = $('#UserName').val();
+
+
+            $('#checking').show();
+            $.getJSON("/Customer/CheckUserName?UserName=" + userName, function (data) {
+                $('#checking').hide();
+                if (data) {
+                    $('#result').text("User already exists in database");
+
+                }
+                else {
+                    $('#result').text("Username Available");
+                }
+            });
+
+        });
+
+    });
+    </script>
+
+@Scripts.Render("~/bundles/jquery.validate")
+<form id="1" method="post" action="/Customer/Add">
+<div id="checking">Checking...</div>
+
+@*<input type="text" value="@TempData["N"]" />*@
+@TempData["N"]
+<div class="content">
+<div class="container">
+        <div class="page-header">
+          <h1>Signup to Create Your Account</h1>
+        </div>
+    <div class="row">
+     <div class="span6 offset3">
+     <h4 class="widget-header"> About you</h4>
+      <div  class="widget-body">
+        <div class="center-align">
+       <div class="form-horizontal form-signin-signup">
+      @*<input type="text" name="userName" id="UserName"  placeholder="Your Name">*@
+           @Html.TextBoxFor(m=>m.Name,new {placeholder="Your Name",id="UserName"})
+   <input type="button" id="b1"  value="check"    class="btn btn-large bottom-space" /><br />
+           
+            @Html.ValidationMessageFor(m=>m.Name)<br />
+
+@*<input type="text" name="Email"   placeholder="Your Email"><br />*@
+           @Html.TextBoxFor(m=>m.Email,new {placeholder="Your Email"})<br />
+           @Html.ValidationMessageFor(m=>m.Email)<br />
+
+@*<input type="text" name="Phone"   placeholder="Your Phone Number"><br />*@
+           @Html.TextBoxFor(m=>m.Phone,new {placeholder="Your Phone Number"})<br />
+            @Html.ValidationMessageFor(m=>m.Phone)<br />
+
+@* <input type="password" name="Password"   placeholder="Your password"><br />*@
+           @Html.PasswordFor(m=>m.Password,new {placeholder="Your password"})<br />
+            @Html.ValidationMessageFor(m=>m.Password)<br />
+
+  <div id="result"></div>
+           <br><br>
+                  
+   <input type="submit" value="Submit" class="btn btn-primary btn-large">
+        <h4><i class="icon-question-sign"></i> Already have an account?</h4>
+                <a href="/Customer/signin" class="btn btn-large bottom-space">Signin</a>
+                <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
+                <ul class="signin-with-list">
+                  <li>
+                    <a class="btn-twitter">
+                      <i class="icon-twitter icon-large"></i>
+                      Signin with Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-facebook">
+                      <i class="icon-facebook icon-large"></i>
+                      Signin with Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-google">
+                      <i class="icon-google-plus icon-large"></i>
+                      Signin with Google
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-github">
+                      <i class="icon-github icon-large"></i>
+                      Signin with Github
+                    </a>
+                  </li>
+                </ul>
+
+             </div> 
+                   
+    </div>
+                  
+               
+                
+                 
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>

@@ -1,0 +1,68 @@
+﻿
+ @{
+    
+    
+    Layout = "~/Views/Shared/_Mylayout3.cshtml";
+
+
+} 
+
+@{
+    ViewBag.Title = "Items";
+}
+
+           <!-- Start: MAIN CONTENT -->
+    <div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1>Update/Delete</h1>
+           
+        </div>
+          
+        <div class="row">
+  <h4 class="widget-header"> List Of Items</h4>
+       <div class="widget-body" style="width:auto;">
+
+           
+
+                <table class="table table-striped">
+                    
+                    <tr>
+<th>Item Id</th>
+<th>Item Name</th>
+<th>Price</th>
+<th>Category</th>
+<th>Pictures</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+@foreach(var item in Model){
+
+    <tr>
+        <td> @item.Id </td>
+        <td> @item.Name </td>
+        <td> @item.Price </td>
+        <td> @item.Category </td>
+        <td><img src="~/Files/@item.ImageUrl" style="width:70px;"  /></td>
+        <td> @Html.ActionLink("Edit", "EditItems", "Admin", new { id = item.Id }, new { }) </td>
+        <td> @Html.ActionLink("Delete", "Delete", new { id=item.Id })</td>
+
+
+    </tr>
+    
+
+
+}
+
+
+    
+
+
+                </table>
+                
+            
+           
+         </div>
+        </div>
+      </div>
+    </div>

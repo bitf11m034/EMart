@@ -1,0 +1,60 @@
+﻿@model FinalProjectEAD.Models.Item
+@{
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "EditItems";
+}
+
+<div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1>Update Items</h1>
+        </div>
+          
+        <div class="row">
+     <div class="span6 offset3">
+     <h4 class="widget-header"> Update item according to your Need</h4>
+        <div class="widget-body">
+                
+   <div class="center-align">
+<div class="form-horizontal form-signin-signup">
+  @using (Html.BeginForm()) {
+      
+   @Html.HiddenFor(model => model.Id)
+      @Html.TextBoxFor(model => model.Name,new Dictionary<string, object> { { "placeholder", "Name" }, { "data-icon", "user" } })
+       @Html.TextBoxFor(model => model.Price)
+  <div class="editor-field">
+       <select name="Category" id="item_category" class="form-control">
+    <option value="Choose Category">Choose Category</option>
+    <option value="Belts">Belts</option>
+    <option value="Pants">Pants</option>
+    <option value="Shirts">Shirts</option>
+    
+</select>
+    
+<br>
+<br>
+
+  @Html.TextBoxFor(model => model.ImageUrl)
+
+ 
+      
+           
+        </div>
+
+                  
+   <input type="submit" value="Save" class="btn btn-primary btn-large">
+                    }
+        </div>
+        <a href="~/Addd/view_data"><input type="submit" value="Back" class="btn btn-large bottom-space"></a>
+    </div>
+                  
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
