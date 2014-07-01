@@ -1,0 +1,139 @@
+ @model FinalProjectEAD.Models.Database1Entities2
+ @{
+    
+    
+    Layout = "~/Views/Shared/_Mylayout.cshtml";
+
+
+} 
+
+@{
+    ViewBag.Title = "SignIn";
+    
+}
+
+
+
+
+
+
+
+
+@Scripts.Render("~/bundles/jquery")
+ <script>
+
+        $(document).ready(function () {
+
+            $('#checking').hide();
+            $('#admin').hide();
+            $('#user').hide();
+            $('#sub11').click(function () {
+                $('#checking').show();
+                var userName = $('#UserName').val();
+                var pass = $('#password').val();
+             
+                $.getJSON("/Customer/Check?UserName=" + userName+"&password="+pass, function (data) {
+               
+                    if (data) {
+                        if (userName == "Awais") {
+                           
+                            $('#admin').show();
+                            
+                          
+
+                        }
+                        $('#main').hide();
+                        $('#checking').hide();
+                        if (userName == "Awais") {
+                            
+   
+
+                            $('#result').text("Welcome to The Kmart Admin " + userName);
+
+                        }
+                        else {
+                            $('#result').text("Welcome to The Kmart " + userName);
+                            $('#user').show();
+                        }
+                    }
+                    else {
+                        $('#checking').hide();
+                        $('#main').hide();
+                        $('#result').text("Invalid Username Or Password");
+                    }
+                });
+
+            });
+
+        });
+  </script>
+ <!-- Start: MAIN CONTENT -->
+<div id="checking">Checking...</div>
+<div id="admin"><a href="~/Admin/signin">admin work?</a></div>
+<div id="user"><a href="~/Customer/Login">Visit EMart?</a></div>
+    <div class="content">
+      <div class="container">
+        <div class="page-header">
+          <h1>Signin to KMART</h1>
+
+            
+        </div>
+           <div id="result"></div>
+        <div class="row" id="main">
+          <div class="span6 offset3">
+            <h4 class="widget-header"><i class="icon-lock"></i> Signin to KMART</h4>
+            <div class="widget-body">
+              <div class="center-align">
+                <form class="form-horizontal form-signin-signup" >
+                  <input type="text" name="username" id="UserName" placeholder="UserName">
+                  <input type="password" name="password" id="password" placeholder="Password">
+                  <div class="remember-me">
+                    <div class="pull-left">
+                      <label class="checkbox">
+                        <input type="checkbox"> Remember me
+                      </label>
+                    </div>
+                    <div class="pull-right">
+                      <a href="#">Forgot password?</a>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <input type="Button" value="Signin" id="sub11" class="btn btn-primary btn-large">
+                </form>
+                <h4><i class="icon-question-sign"></i> Don't have an account?</h4>
+                <a href="/Customer/signUp" class="btn btn-large bottom-space">Signup</a>
+                <h4><i class="icon-thumbs-up"></i> Sign in with third party account</h4>
+                <ul class="signin-with-list">
+                  <li>
+                    <a class="btn-twitter">
+                      <i class="icon-twitter icon-large"></i>
+                      Signin with Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-facebook">
+                      <i class="icon-facebook icon-large"></i>
+                      Signin with Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-google">
+                      <i class="icon-google-plus icon-large"></i>
+                      Signin with Google
+                    </a>
+                  </li>
+                  <li>
+                    <a class="btn-github">
+                      <i class="icon-github icon-large"></i>
+                      Signin with Github
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End: MAIN CONTENT -->
+   
